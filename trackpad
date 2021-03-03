@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# Script to toggle touchpad on and off
+
+if [ "$(xinput list-props 'SynPS/2 Synaptics TouchPad' | grep 'Device Enabled' | gawk -F ':\t' '{print $2}')" -eq 0 ]; then
+    xinput enable 'SynPS/2 Synaptics TouchPad'
+    notify "Trackpad enabled" 2
+elif [ "$(xinput list-props 'SynPS/2 Synaptics TouchPad' | grep 'Device Enabled' | gawk -F ':\t' '{print $2}')" -eq 1 ]; then
+    xinput disable 'SynPS/2 Synaptics TouchPad'
+    notify "Trackpad disabled" 2
+fi
+

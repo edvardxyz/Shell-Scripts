@@ -1,0 +1,7 @@
+#!/bin/sh
+
+if [ "$(awk -F ' ' 'NR==1{print $2}' < ~/.asoundrc)" -eq 2 ]; then
+    echo -e "defaults.pcm.card 1\ndefaults.ctl.card 1" > ~/.asoundrc
+elif [ "$(awk -F ' ' 'NR==1{print $2}' < ~/.asoundrc)" -eq 1 ]; then
+    echo -e "defaults.pcm.card 2\ndefaults.ctl.card 2" > ~/.asoundrc
+fi

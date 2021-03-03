@@ -1,0 +1,33 @@
+#!/bin/env bash
+
+shopt -s nullglob globstar
+
+n=1
+columns=$(tput cols)
+
+prefix=${PASSWORD_STORE_DIR-~/.password-store}
+password_files=( "$prefix"/**/*.gpg )
+password_files=( "${password_files[@]#"$prefix"/}" )
+password_files=( "${password_files[@]%.gpg}" )
+
+password=$(printf '%s\n' "${password_files[@]}" | dmenu "$@")
+
+[[ -n $password ]] || exit
+
+pass show -c "$password" 2>/dev/null
+
+tput civis
+while [ $n -lt 46 ]
+do
+    printf "\n\n\n\n\n"
+    printf "%*s\n" $(((${#n}+$columns+14)/2)) "$n seconds left!"
+    n=$(( n+1 )) 
+    sleep 1
+    clear
+    echo Copied "$password" to clipboard. Will clear in 45 seconds.
+done
+
+
+
+
+

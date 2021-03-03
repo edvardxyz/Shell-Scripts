@@ -1,0 +1,15 @@
+#!/bin/sh
+
+i=$(xclip -o -selection clipboard)
+
+# mpv --ytdl-format=22 --fs "${i}" || 
+
+mpv --fs "${i}" &
+
+case "$i" in
+    *twitch*)
+        firefox --new-window "${i}/chat?popout="
+        ;;
+esac
+
+

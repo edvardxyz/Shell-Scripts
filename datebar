@@ -1,0 +1,3 @@
+#!/bin/sh
+
+echo "  $(date "+%a %h %d |  %H:%M |")" > ~/.cache/statusbar/date

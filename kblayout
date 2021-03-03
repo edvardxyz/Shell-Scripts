@@ -1,0 +1,22 @@
+#!/bin/sh
+
+TOGGLE=$HOME/.local/bin/.toggle
+#layout=$(setxkbmap -query | awk '/layout/{ print $2 }' | tr '[:lower:]' '[:upper:]')
+
+if [ ! -e $TOGGLE ]; then
+    touch $TOGGLE
+    setxkbmap -layout dk
+    echo "  DK |" > ~/.cache/statusbar/layout
+    barupdate
+    notify "Keyboard set to Danish!" 2
+else
+    rm $TOGGLE
+    setxkbmap -layout us
+    echo "  US |" > ~/.cache/statusbar/layout
+    barupdate
+    notify "Keyboard set to English!" 2
+fi
+
+#echo "  $layout |" > ~/.cache/statusbar/layout
+#echo "  $(setxkbmap -query | awk '/layout/{ print $2 }' | tr '[:lower:]' '[:upper:]') |" > ~/.cache/statusbar/layout
+

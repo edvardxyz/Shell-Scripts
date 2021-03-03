@@ -1,0 +1,3 @@
+#!/bin/sh
+
+free -m | awk '(NR == 2) {print "  " $3 "/" $2 " MB |"}' > ~/.cache/statusbar/mem

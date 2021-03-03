@@ -1,0 +1,3 @@
+#!/bin/sh
+
+echo "  = \$$(wget -O - -o /dev/null https://api.coinpaprika.com/v1/ticker/btc-bitcoin | grep -oEw '[0-9]{4,5}') |" > ~/.cache/statusbar/btcprice

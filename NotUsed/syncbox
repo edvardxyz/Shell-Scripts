@@ -1,0 +1,43 @@
+#!/bin/sh
+
+# get system startup time to compare against each file
+# to see if any changes have been made since startup
+# use this to avoid overwriting changes made in sync folder
+# if system has been offline initial sync from remote to local will fail
+# so when computer gets internet back it will overwrite changes.
+#
+
+boottime=$(uptime -s)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ersyn=/tmp/errorsync
+insyn=/tmp/initsyncdone
+
+if [ ! -e $insyn ]; then
+    # File not found do:
+    rclone sync box:test /home/"$USER"/testsync/ 2>$ersyn && touch /tmp/initsyncdone
+fi
+
+if [ -e $ersyn ]
+then
+    # File found do:
+    notify "WARNING rclone failed initial sync of remote! Will not sync until error cleared"
+else
+    # File not found do:
+    rclone sync /home/"$USER"/testsync/ box:test
+    notify "~/sync folder syncronized"
+    #rclone sync ~/sync/ boxEncrypt:
+fi

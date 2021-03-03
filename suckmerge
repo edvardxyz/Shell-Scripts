@@ -1,0 +1,10 @@
+#!/bin/sh
+
+git reset --hard origin/master &&
+for branch in $(git for-each-ref --format='%(refname)' refs/heads/ | cut -d'/' -f3); do
+	if [ "$branch" != "master" ];then
+		echo "Merging $branch..."
+		git merge $branch -m $branch
+	fi
+done
+make && doas make clean install

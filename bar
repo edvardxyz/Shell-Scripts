@@ -1,0 +1,6 @@
+#!/bin/sh
+
+while :; do
+    barupdate
+    sleep 60
+done

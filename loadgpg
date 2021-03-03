@@ -1,0 +1,8 @@
+#!/bin/sh
+
+
+unset GPG_AGENT_INFO SSH_AGENT_PID SSH_AUTH_SOCK
+
+killall gpg-agent
+
+eval $(gpg-agent --daemon --enable-ssh-support)

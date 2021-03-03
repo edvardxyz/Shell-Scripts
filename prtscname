@@ -1,0 +1,6 @@
+#!/bin/bash
+
+read -p "Enter name of screenshot:" picturename
+xdotool key "alt+shift+s"
+import ~/sync/pic/$picturename.png
+notify "Screenshot saved to ~/sync/pic/$picturename.png" 2

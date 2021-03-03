@@ -1,0 +1,15 @@
+#!/bin/sh
+
+location=/sys/class/backlight/intel_backlight/brightness
+brightness=$(< $location)
+maxbrightness=$(< /sys/class/backlight/intel_backlight/max_brightness)
+percent=$(echo "$brightness / $maxbrightness * 100"  | bc -l | cut -d. -f1 )
+percent2digit=$(( $2 * $maxbrightness/100 ))
+newbrightness=$(( $brightness $1 $percent2digit ))
+
+if [ $newbrightness -gt 5 ]
+then
+    echo $(( $brightness $1 $percent2digit )) > $location 2>/dev/null \
+        || echo "$maxbrightness" > $location
+    echo "  $percent % |" > ~/.cache/statusbar/brightnesspercent
+fi

@@ -1,0 +1,3 @@
+#!/bin/sh
+
+urxvtc -e mpv ~/Music/"$(ls ~/Music/ | dmenu -i -p "Search song")"

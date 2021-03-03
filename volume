@@ -1,0 +1,15 @@
+#!/bin/sh
+
+VOL="$(amixer get Master | awk '$0~/%/{print $4}' | tr -d '[]%')"
+printvol=""
+
+if [ $VOL -gt 50 ]; then
+    printvol="  $VOL%"
+elif [ $VOL -gt 0 ]; then
+    printvol="  $VOL%"
+else
+    printvol=" "
+fi
+
+echo "$printvol |" > ~/.cache/statusbar/volume
+barupdate

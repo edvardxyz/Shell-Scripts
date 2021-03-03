@@ -1,0 +1,3 @@
+#!/bin/sh
+
+iw dev wlp3s0 scan | grep SSID

@@ -1,0 +1,26 @@
+#!/bin/sh
+
+# maybe also make notification disapear by clicking on it with dwm patch
+
+notifyfile=~/.cache/statusbar/notify
+timee=$2
+# $1 first arg is message to notify
+#endTime=$(( $(date +%s) + $2 )) # Calculate end time. maybe 2 instead of $2
+#while [ $(date +%s) -lt $endTime ]; do # Loop until interval has elapsed.
+#      echo "$1" > $notifyfile
+#      sleep 2
+#done
+if [ -z "$2" ]
+then
+    timee=30
+fi
+
+message="| $1 | "
+echo "$message" >> $notifyfile
+tr -d '\n' < $notifyfile > /tmp/trtemp && mv /tmp/trtemp $notifyfile
+barupdate
+sleep $timee
+
+sed -i "s,$message,,g" $notifyfile
+
+barupdate

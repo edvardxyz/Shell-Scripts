@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# Sync remote to local & redirect error so syncbox script will not run.
+rclone sync box:test ~/testsync/ 2>~/.cache/syncerror
