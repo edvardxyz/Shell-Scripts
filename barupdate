@@ -1,11 +1,4 @@
 #!/bin/sh
 
-if [ "$(hostname)" = "vision" ]; then
+xsetroot -name "$(cat ~/.cache/statusbar/{notify,btcprice,bat,cputemp,cpufan,mem,layout,wifi,volume,date} | tr -d '\n')"
 
-    xsetroot -name "$(cat ~/.cache/statusbar/{notify,btcprice,bat,cputemp,mem,layout,wifi,brightnesspercent,volume,date} | tr -d '\n')"
-
-else
-
-    xsetroot -name "$(cat ~/.cache/statusbar/{notify,btcprice,cputemp,mem,layout,brightnesspercent,volume,date} | tr -d '\n')"
-
-fi

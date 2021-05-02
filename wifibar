@@ -1,18 +1,10 @@
 #!/bin/sh
 
 case "$(cat /sys/class/net/w*/operstate 2>/dev/null)" in
-	down) wifiicon="" ;;
-	up) strength=$(iw dev wlp3s0 station dump -v | grep signal: | awk '{print $2}')
-        if [ $strength -gt -55 ]; then
-            wifiicon=""
-        elif [ $strength -gt -70 ]; then
-            wifiicon=""
-        elif [ $strength -gt -80 ]; then
-            wifiicon=""
-        else 
-            wifiicon=""
-        fi
-        ;;
+	down) 	
+		echo " WIFI DOWN |" > ~/.cache/statusbar/wifi;;
+	up) 	
+		strength=$(iw dev wlp3s0 station dump -v | grep signal: | awk '{print $2}')
+		echo "$strength dBm |" > ~/.cache/statusbar/wifi;;
 esac
 
-echo " $wifiicon $strength dBm |" > ~/.cache/statusbar/wifi

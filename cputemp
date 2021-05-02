@@ -1,3 +1,8 @@
 #!/bin/sh
 
-echo "  $(sed 's/000$/°C/' /sys/class/thermal/thermal_zone*/temp | tail -n 1) |"  > ~/.cache/statusbar/cputemp
+sensors="$(sensors -j 2>/dev/null | grep -A3 fan1_input)"
+cputemp=$(echo "$sensors" | awk 'END{print $2}')
+fanrpm=$(echo "$sensors" | awk 'NR==1{print $2}')
+
+echo " FAN:${fanrpm%.*}RPM |" > ~/.cache/statusbar/cpufan
+echo " CPU:${cputemp%.*}°C |" > ~/.cache/statusbar/cputemp

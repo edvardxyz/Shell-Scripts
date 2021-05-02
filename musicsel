@@ -1,3 +1,12 @@
 #!/bin/sh
 
-urxvtc -e mpv ~/Music/"$(ls ~/Music/ | dmenu -i -p "Search song")"
+
+if [ "$#" -eq 0 ]; then
+    st -e mpv --input-ipc-server=/tmp/mpvsocket --no-resume-playback --term-osd-bar --no-video --shuffle ~/music/"$(ls ~/music/ | dmenu -i -p "Search song")"
+elif [ "$1" = "next" ]; then
+    echo 'playlist-next' | socat - /tmp/mpvsocket
+elif [ "$1" = "prev" ]; then
+    echo 'playlist-prev' | socat - /tmp/mpvsocket
+elif [ "$1" = "pause" ]; then
+    echo 'cycle pause' | socat - /tmp/mpvsocket
+fi

@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# Get monitors and remove first line
+allScreens="$(xrandr --listmonitors | tail -n +2)"
+
+# Get correct column
+screensAwked="$(awk '{print $4}' <<< "$allScreens")"
+
+# Only grab external monitor
+screen="$(echo "$screensAwked" | grep -v "eDP")"
+
+# Select monitor with dmenu NOTUSED
+#selected="$(echo "$screensAwked" | dmenu)"
+
+xrandr --output $screen --auto --left-of eDP

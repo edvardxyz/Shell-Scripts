@@ -1,9 +1,0 @@
-#!/bin/sh
-
-if [ $1 = "i" ]; then
-	apulse firefox-bin --private-window
-  elif [ $1 = "d" ]; then
-	apulse firefox-bin -P default
-  else
-	apulse firefox-bin
-fi

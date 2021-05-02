@@ -1,0 +1,4 @@
+#!/bin/sh
+
+cardNumb="$(cat /proc/asound/cards | grep "USB-Audio - H" | awk '{print $1}')"
+echo -e "defaults.pcm.card $cardNumb\ndefaults.ctl.card $cardNumb" > ~/.config/alsa/.asoundrc
