@@ -1,5 +1,5 @@
 #!/bin/sh
 
-hypervusb
+hyperxusb
 setxkbmap -option ""
 xrandr --output DisplayPort-2 --auto --output DisplayPort-4 --mode 1920x1080 --rate 144.00 --right-of DisplayPort-2 --output eDP --off
